@@ -60,7 +60,7 @@ defmodule PasswordGenerator do
 
   value =
     options_values
-    |> Enum.all?(fn x -> String.to_atoms(x) |> is_boolean())
+    |> Enum.all?(fn x -> x |> String.to_atoms() |> is_boolean() end)
 
   validate_options_values_are_boolean(value, length, options_without_length)
  end
@@ -68,5 +68,6 @@ defmodule PasswordGenerator do
  defp validate_options_values_are_boolean(false, _length, _options) do
     {:error, "Only Booleans allowed for options values"}
  end
+
 
 end
