@@ -9,8 +9,7 @@ defmodule PasswordGenerator do
   }
   the options are only 4 Length,Numbers,Uppercase,Symbols
   """
-  @allowed_options [:length, :numbers, :uppercase, :smybols]
-
+  @allowed_options [:length, :numbers, :uppercase, :symbols]
   @doc """
   GENERATE PASSWORD FOR GIVEN OPTIONS
   ## Example
@@ -115,6 +114,24 @@ defmodule PasswordGenerator do
 
   defp get(:lowercase_letter) do
     <<Enum.random(?a..?z)>>
+  end
+
+  defp get(:uppercase) do
+    <<Enum.random(?A..?Z)>>
+  end
+
+  defp get(:numbers) do
+    Enum.random(0..9)
+    |> Integer.to_string()
+  end
+
+  @symbols "!#$%&()*+@-<,>./?;:[]_{}~"
+  defp get(:symbols) do
+    symbols =
+      @symbols
+      |> String.split("", trim: true)
+
+    Enum.random(symbols)
   end
 
   defp included_options(options) do
